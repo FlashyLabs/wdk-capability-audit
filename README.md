@@ -12,6 +12,10 @@
 A capability audit for wallets built on [Tether's WDK](https://github.com/tetherto/wdk). It scans a project's `node_modules` for every installed `@tetherto/wdk-*` package, reads what each one declares about the chains it supports, and classifies each chain as **mainnet**, **testnet**, or **unknown** — against a small, hand-maintained registry, never a guess.
 
 [![tests](https://github.com/FlashyLabs/wdk-capability-audit/actions/workflows/ci.yml/badge.svg)](https://github.com/FlashyLabs/wdk-capability-audit/actions/workflows/ci.yml)
+[![CodeQL](https://github.com/FlashyLabs/wdk-capability-audit/actions/workflows/codeql.yml/badge.svg)](https://github.com/FlashyLabs/wdk-capability-audit/actions/workflows/codeql.yml)
+[![Scorecard](https://github.com/FlashyLabs/wdk-capability-audit/actions/workflows/scorecard.yml/badge.svg)](https://github.com/FlashyLabs/wdk-capability-audit/security/code-scanning)
+[![npm version](https://img.shields.io/npm/v/@flashylabs/wdk-capability-audit.svg)](https://www.npmjs.com/package/@flashylabs/wdk-capability-audit)
+[![npm downloads](https://img.shields.io/npm/dm/@flashylabs/wdk-capability-audit.svg)](https://www.npmjs.com/package/@flashylabs/wdk-capability-audit)
 [![license](https://img.shields.io/badge/license-Apache--2.0-blue.svg)](./LICENSE)
 [![node](https://img.shields.io/badge/node-%3E%3D20-brightgreen.svg)](https://nodejs.org)
 

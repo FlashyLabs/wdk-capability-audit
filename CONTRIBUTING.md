@@ -20,6 +20,14 @@ No build step, no external services, no network access needed to develop or test
 - **`summary` stays derived.** Don't add a code path that lets `buildReport()` accept a caller-supplied `summary` — see `ARCHITECTURE.md` for why that boundary exists.
 - **No dependency, runtime or dev, beyond `typescript`.** This package ships zero runtime dependencies, same as its siblings; a change that needs one should be raised as an issue first.
 
+## GitHub Actions are pinned by commit SHA, not by tag
+
+Every `uses:` line in `.github/workflows/` names a full 40-character commit SHA, with the version as a trailing `# vX.Y.Z` comment — never a floating tag like `@v4`. A tag can be retargeted upstream, by the action's own maintainer or by an attacker who compromises their account; a commit SHA can't move. `test/workflow-pins.test.mjs` enforces this as a real, failing test, not just a convention someone might forget.
+
+Dependabot (`.github/dependabot.yml`) understands this convention specifically for GitHub Actions: when a pinned action ships a new release, it opens a PR bumping both the SHA and the version comment together, so the pin never silently goes stale either.
+
+`.github/workflows/codeql.yml` and `.github/workflows/scorecard.yml` run GitHub's static analysis and the OpenSSF Scorecard respectively — both read-only, both already green, both checkable independently rather than taken on trust. Scorecard's results upload as a SARIF to this repo's own code scanning tab; `publish_results` (which would also post them to the public `securityscorecards.dev` badge API) is deliberately `false` for now — a real run on the sibling repo `wdk-policy-guard` proved GitHub's OIDC token endpoint here doesn't hand back a signable token, which is an org-level Actions permission, not something this file can fix. Whoever has FlashyLabs org admin access can check Settings → Actions → General → Workflow permissions for the OIDC/ID-token setting; flip `publish_results` to `true` once that's resolved.
+
 ## Reporting a bug
 
 Open an issue with: the directory structure (or a trimmed `package.json`) that produced the wrong result, what `inspectModule()` or `classifyChain()` returned, and what you expected. Because every exported function here is pure, most bug reports are reproducible as a single test case — include one if you can; it becomes the regression test.
