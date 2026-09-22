@@ -1,0 +1,65 @@
+{
+  "name": "@flashylabs/wdk-capability-audit",
+  "version": "0.1.0",
+  "description": "Scan a project's node_modules for installed @tetherto/wdk-* packages and report what chains each declares — mainnet, testnet, or unknown, against a small hand-maintained registry of chain identifiers this package is confident are real. Never guesses at a chain it doesn't recognize, and refuses rather than emitting an empty report that looks clean.",
+  "type": "module",
+  "main": "./src/index.js",
+  "types": "./dist/index.d.ts",
+  "bin": {
+    "wdk-capability-audit": "./bin/wdk-capability-audit.js"
+  },
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./src/index.js"
+    }
+  },
+  "scripts": {
+    "test": "node --test test/*.test.mjs",
+    "manifest": "node src/manifest.js --write",
+    "check": "node src/manifest.js --check",
+    "version": "npm run manifest && git add wdk-capability-audit.manifest.json",
+    "build:types": "tsc -p tsconfig.json",
+    "test:types": "npm run build:types && tsc -p test-types/tsconfig.json",
+    "prepublishOnly": "npm run build:types"
+  },
+  "keywords": [
+    "wdk",
+    "tether",
+    "wallet",
+    "audit",
+    "capability",
+    "chain",
+    "testnet",
+    "mainnet",
+    "agent",
+    "crypto",
+    "web3",
+    "cli"
+  ],
+  "author": "Flashy Labs",
+  "license": "Apache-2.0",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/FlashyLabs/wdk-capability-audit.git"
+  },
+  "homepage": "https://github.com/FlashyLabs/wdk-capability-audit#readme",
+  "bugs": {
+    "url": "https://github.com/FlashyLabs/wdk-capability-audit/issues"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "devDependencies": {
+    "typescript": "^5.9.0"
+  },
+  "files": [
+    "src",
+    "bin",
+    "schema",
+    "dist",
+    "LICENSE",
+    "README.md",
+    "CHANGELOG.md"
+  ]
+}

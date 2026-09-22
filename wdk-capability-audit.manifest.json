@@ -1,0 +1,122 @@
+{
+  "contract": "wdk-capability-audit-manifest/1",
+  "name": "@flashylabs/wdk-capability-audit",
+  "module": {
+    "package": "@flashylabs/wdk-capability-audit",
+    "version": "0.1.0"
+  },
+  "reportContract": "wdk-capability-audit-report/1",
+  "inspectionStatuses": [
+    "inspected",
+    "unrecognized-shape",
+    "unreadable"
+  ],
+  "classifications": [
+    "mainnet",
+    "testnet",
+    "unknown"
+  ],
+  "chainRegistryVersion": "2026-09-22",
+  "registeredChains": [
+    {
+      "namespace": "evm",
+      "id": "1",
+      "classification": "mainnet"
+    },
+    {
+      "namespace": "evm",
+      "id": "11155111",
+      "classification": "testnet"
+    },
+    {
+      "namespace": "evm",
+      "id": "17000",
+      "classification": "testnet"
+    },
+    {
+      "namespace": "evm",
+      "id": "8453",
+      "classification": "mainnet"
+    },
+    {
+      "namespace": "evm",
+      "id": "84532",
+      "classification": "testnet"
+    },
+    {
+      "namespace": "evm",
+      "id": "137",
+      "classification": "mainnet"
+    },
+    {
+      "namespace": "evm",
+      "id": "80002",
+      "classification": "testnet"
+    },
+    {
+      "namespace": "evm",
+      "id": "42161",
+      "classification": "mainnet"
+    },
+    {
+      "namespace": "evm",
+      "id": "421614",
+      "classification": "testnet"
+    },
+    {
+      "namespace": "evm",
+      "id": "10",
+      "classification": "mainnet"
+    },
+    {
+      "namespace": "evm",
+      "id": "11155420",
+      "classification": "testnet"
+    },
+    {
+      "namespace": "evm",
+      "id": "56",
+      "classification": "mainnet"
+    },
+    {
+      "namespace": "evm",
+      "id": "97",
+      "classification": "testnet"
+    },
+    {
+      "namespace": "tron",
+      "id": "mainnet",
+      "classification": "mainnet"
+    },
+    {
+      "namespace": "tron",
+      "id": "nile",
+      "classification": "testnet"
+    },
+    {
+      "namespace": "tron",
+      "id": "shasta",
+      "classification": "testnet"
+    },
+    {
+      "namespace": "bitcoin",
+      "id": "mainnet",
+      "classification": "mainnet"
+    },
+    {
+      "namespace": "bitcoin",
+      "id": "testnet3",
+      "classification": "testnet"
+    }
+  ],
+  "scans": [
+    "<dir>/node_modules/@tetherto/wdk-* — the umbrella @tetherto/wdk package itself (no suffix) is out of scope by this pattern"
+  ],
+  "refuses": [
+    "a package whose declared chain configuration does not match the assumed wdk.chains shape — status unrecognized-shape, never guessed at",
+    "a package.json that cannot be read or parsed — status unreadable, never treated as zero chains",
+    "a chain identifier absent from the hand-maintained registry — classification unknown, never inferred",
+    "reporting a scan that found zero @tetherto/wdk-* packages as a clean result — the CLI exits non-zero instead",
+    "a caller-supplied summary — summary is always computed from the packages array, never accepted as input"
+  ]
+}
