@@ -7,6 +7,7 @@ import { dirname, join } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { REPORT_CONTRACT, CLASSIFICATIONS, INSPECTION_STATUSES } from './codes.js'
 import { CHAIN_REGISTRY_VERSION, listRegisteredChains } from './registry.js'
+import { FAUCET_REGISTRY_VERSION, listFaucets, listNoFaucetByDesign } from './faucets.js'
 
 const ROOT = dirname(dirname(fileURLToPath(import.meta.url)))
 
@@ -21,6 +22,9 @@ export function build() {
     classifications: CLASSIFICATIONS,
     chainRegistryVersion: CHAIN_REGISTRY_VERSION,
     registeredChains: listRegisteredChains(),
+    faucetRegistryVersion: FAUCET_REGISTRY_VERSION,
+    faucets: listFaucets(),
+    noFaucetByDesign: listNoFaucetByDesign(),
     scans: [
       '<dir>/node_modules/@tetherto/wdk-* — the umbrella @tetherto/wdk package itself (no suffix) is out of scope by this pattern',
     ],

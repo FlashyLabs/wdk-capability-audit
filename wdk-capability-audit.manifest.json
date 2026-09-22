@@ -107,6 +107,92 @@
       "namespace": "bitcoin",
       "id": "testnet3",
       "classification": "testnet"
+    },
+    {
+      "namespace": "bitcoin",
+      "id": "testnet4",
+      "classification": "testnet"
+    },
+    {
+      "namespace": "bitcoin",
+      "id": "signet",
+      "classification": "testnet"
+    }
+  ],
+  "faucetRegistryVersion": "2026-09-22",
+  "faucets": [
+    {
+      "namespace": "evm",
+      "id": "11155111",
+      "name": "Google Cloud Web3 Faucet — Ethereum Sepolia",
+      "url": "https://cloud.google.com/application/web3/faucet/ethereum/sepolia"
+    },
+    {
+      "namespace": "evm",
+      "id": "17000",
+      "name": "Google Cloud Web3 Faucet — Ethereum Holesky",
+      "url": "https://cloud.google.com/application/web3/faucet/ethereum/holesky"
+    },
+    {
+      "namespace": "evm",
+      "id": "84532",
+      "name": "Base network faucets (official list, Base docs)",
+      "url": "https://docs.base.org/base-chain/network-information/network-faucets"
+    },
+    {
+      "namespace": "evm",
+      "id": "80002",
+      "name": "Polygon Faucet (official, select Amoy)",
+      "url": "https://faucet.polygon.technology/"
+    },
+    {
+      "namespace": "evm",
+      "id": "421614",
+      "name": "Chainlink Faucet — Arbitrum Sepolia",
+      "url": "https://faucets.chain.link/arbitrum-sepolia"
+    },
+    {
+      "namespace": "evm",
+      "id": "11155420",
+      "name": "Superchain Dev Console Faucet — OP Sepolia (official, Optimism)",
+      "url": "https://console.optimism.io/faucet"
+    },
+    {
+      "namespace": "evm",
+      "id": "97",
+      "name": "BNB Chain Testnet Faucet (official)",
+      "url": "https://www.bnbchain.org/en/testnet-faucet"
+    },
+    {
+      "namespace": "tron",
+      "id": "nile",
+      "name": "Nile Testnet Faucet (official)",
+      "url": "https://nileex.io/join/getJoinPage"
+    },
+    {
+      "namespace": "tron",
+      "id": "shasta",
+      "name": "TronGrid Shasta Faucet",
+      "url": "https://www.trongrid.io/shasta/"
+    },
+    {
+      "namespace": "bitcoin",
+      "id": "testnet4",
+      "name": "coinfaucet.eu — Bitcoin testnet4",
+      "url": "https://coinfaucet.eu/en/btc-testnet4/"
+    },
+    {
+      "namespace": "bitcoin",
+      "id": "signet",
+      "name": "Bitcoin Signet Faucet",
+      "url": "https://signetfaucet.com/"
+    }
+  ],
+  "noFaucetByDesign": [
+    {
+      "namespace": "bitcoin",
+      "id": "testnet3",
+      "reason": "Bitcoin Core 30.0 (October 2025) removed testnet3 support entirely; Core 28.0 added testnet4 (BIP 94) as its intended replacement. Use bitcoin:testnet4 or bitcoin:signet instead."
     }
   ],
   "scans": [

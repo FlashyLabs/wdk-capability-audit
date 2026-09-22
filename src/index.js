@@ -1,6 +1,7 @@
 export { discoverWdkPackages } from './discover.js'
 export { inspectModule } from './inspect.js'
 export { classifyChain, listRegisteredChains, CHAIN_REGISTRY_VERSION } from './registry.js'
+export { getFaucet, listFaucets, listNoFaucetByDesign, FAUCET_REGISTRY_VERSION } from './faucets.js'
 export { buildReport, deriveSummary, validateReport, REPORT_SCHEMA } from './report.js'
 export { auditDirectory } from './audit.js'
 export { REPORT_CONTRACT, INSPECTION_STATUSES, CLASSIFICATIONS } from './codes.js'

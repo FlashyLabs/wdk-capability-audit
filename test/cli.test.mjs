@@ -65,3 +65,23 @@ test('CLI: --help exits 0 and prints usage', () => {
   assert.equal(result.status, 0)
   assert.ok(result.stdout.includes('Usage:'))
 })
+
+test('CLI --faucets: prints a table and exits 0, without touching node_modules at all', () => {
+  const result = run(['--faucets', '--dir', join(FIXTURES, 'no-node-modules')])
+  assert.equal(result.status, 0, '--faucets must not require any @tetherto packages, or even a --dir, to work')
+  assert.ok(result.stdout.includes('CHAIN'))
+  assert.ok(result.stdout.includes('evm:11155111'))
+  assert.ok(result.stdout.includes('No faucet listed on purpose'))
+  assert.ok(result.stdout.includes('bitcoin:testnet3'))
+})
+
+test('CLI --faucets --json: emits valid JSON with faucets and noFaucetByDesign', () => {
+  const result = run(['--faucets', '--json'])
+  assert.equal(result.status, 0)
+  let body
+  assert.doesNotThrow(() => { body = JSON.parse(result.stdout) })
+  assert.ok(Array.isArray(body.faucets))
+  assert.ok(body.faucets.length > 0)
+  assert.ok(Array.isArray(body.noFaucetByDesign))
+  assert.equal(typeof body.faucetRegistryVersion, 'string')
+})

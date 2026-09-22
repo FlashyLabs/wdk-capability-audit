@@ -17,11 +17,15 @@
 //     testnet names (https://developers.tron.network/docs/networks).
 //     TRON does not use EIP-155-style numeric chain IDs for these networks
 //     in the way EVM chains do, so they are registered as strings.
-//   - Bitcoin network names (mainnet, testnet3) are Bitcoin Core's own
-//     network identifiers (https://developer.bitcoin.org/examples/testing.html).
-//     Newer networks (testnet4, signet) are deliberately left out: this
-//     package's authors were not confident enough of a single canonical
-//     string identifier for them to publish one.
+//   - Bitcoin network names are Bitcoin Core's own chain identifiers
+//     (bitcoin-cli's allowed -chain values: main, test, testnet4, signet,
+//     regtest — https://bitcoincore.academy/testnets.html). testnet3 is
+//     included for historical accuracy (it is still, factually, a testnet)
+//     but Bitcoin Core has deprecated it: Core 28.0 added testnet4 (BIP 94)
+//     as its intended replacement, and Core 30.0 (October 2025) removed
+//     testnet3 support entirely. A caller auditing a live Bitcoin
+//     integration in 2026 should treat a bare "testnet3" finding as a flag
+//     worth raising on its own, not just a routine testnet classification.
 'use strict'
 
 /** Bump this whenever an entry is added, removed, or corrected. Carried into every report so a reader knows which table classified it. */
@@ -50,7 +54,9 @@ const REGISTRY = new Map([
 
   // --- Bitcoin (network name) ---
   ['bitcoin:mainnet', 'mainnet'],
-  ['bitcoin:testnet3', 'testnet'],
+  ['bitcoin:testnet3', 'testnet'], // deprecated by Bitcoin Core 30.0 (Oct 2025) — see comment above
+  ['bitcoin:testnet4', 'testnet'], // BIP 94, added Bitcoin Core 28.0 — testnet3's intended replacement
+  ['bitcoin:signet', 'testnet'], // BIP 325
 ])
 
 /**

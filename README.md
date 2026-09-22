@@ -95,8 +95,23 @@ The primary product is the JSON report, not the table — `--json` emits a docum
 | `validateReport(report)` | Validates a report against `schema/report.schema.json` plus the summary-derivation rule. Returns an array of problems; empty means valid. |
 | `auditDirectory(dir?, now?)` | The full pipeline: discover, inspect, classify, build. What the CLI calls. |
 | `REPORT_CONTRACT`, `INSPECTION_STATUSES`, `CLASSIFICATIONS` | The closed vocabularies every report's `contract`, `status`, and `classification` fields are drawn from. |
+| `getFaucet(namespace, id)` | Looks up the testnet faucet listed for a chain. Returns `{name, url}` or `null` — never a guess, and a fresh copy each call. |
+| `listFaucets()` | Every faucet this version lists, as `{namespace, id, name, url}`. |
+| `listNoFaucetByDesign()` | Testnet chains this package recognizes but deliberately lists no faucet for, with the reason — e.g. a deprecated network. Distinct from a chain simply not yet added. |
 
 Full TypeScript declarations ship with the package, generated from the source's own JSDoc so the types can never drift from the implementation. `test-types/consumer.ts` is the type-level test that would fail if they ever did.
+
+## Faucets
+
+Once you know a chain is testnet, the next question is where to get funds. `wdk-capability-audit --faucets` (or `--faucets --json`) prints a small, hand-maintained list — one faucet per testnet chain this package recognizes, source-checked on the date in `FAUCET_REGISTRY_VERSION`:
+
+```bash
+npx wdk-capability-audit --faucets
+```
+
+**This package's own code never fetches or verifies these URLs.** A listed faucet can go offline or change its terms at any time — see `docs/wallet`-style doctrine elsewhere in this org: "committed is not served." Treat the list as a checked-once pointer, not a live status.
+
+`bitcoin:testnet3` is deliberately listed with *no* faucet, not silently omitted: Bitcoin Core 30.0 (October 2025) removed testnet3 support entirely, and Core 28.0 had already added `testnet4` (BIP 94) as its intended replacement. `listNoFaucetByDesign()` — and the CLI's own output — says so by name, rather than leaving a reader to wonder whether testnet3 was simply forgotten.
 
 ## What this does not do
 
@@ -123,7 +138,9 @@ Given that gap, `inspectModule()` is designed to do the honest thing rather than
 
 **Discovery matches `@tetherto/wdk-*` exactly, as specified.** The umbrella `@tetherto/wdk` package (name exactly `wdk`, no suffix) is therefore never scanned by this tool, by design — only `@tetherto/wdk-<something>` packages are.
 
-**The chain registry is intentionally short.** `src/registry.js` lists only the chain identifiers this package's authors are confident are correct without looking anything up: Ethereum mainnet and its current public testnets, four EVM L2 mainnet/testnet pairs, Tron's mainnet/Nile/Shasta, and Bitcoin's mainnet/testnet3. A production deployment on a chain not in that list will classify `unknown` — that is correct behavior, not a gap to silently work around by guessing.
+**The chain registry is intentionally short.** `src/registry.js` lists only the chain identifiers this package's authors are confident are correct: Ethereum mainnet and its current public testnets, four EVM L2 mainnet/testnet pairs, Tron's mainnet/Nile/Shasta, and Bitcoin's mainnet, testnet3, testnet4, and signet. A production deployment on a chain not in that list will classify `unknown` — that is correct behavior, not a gap to silently work around by guessing.
+
+**The faucet list (`src/faucets.js`, `--faucets`) is checked by web search, not verified live.** Every URL was confirmed against at least one official docs page or the faucet's own title, on the date in `FAUCET_REGISTRY_VERSION` — this package's own code never fetches them, so a faucet can go stale between that date and when you read this. `bitcoin:testnet3` is a worked example of the discipline this whole package is built on: Bitcoin Core deprecated and then removed testnet3 support (found via the same search pass that built the rest of the list), so rather than listing a faucet for a network that's disappearing, `listNoFaucetByDesign()` says so by name and points at the replacement.
 
 ## Testing
 

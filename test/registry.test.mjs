@@ -18,7 +18,9 @@ test('classifyChain(): well-known Tron networks classify correctly', () => {
 
 test('classifyChain(): well-known Bitcoin networks classify correctly', () => {
   assert.equal(classifyChain('bitcoin', 'mainnet'), 'mainnet')
-  assert.equal(classifyChain('bitcoin', 'testnet3'), 'testnet')
+  assert.equal(classifyChain('bitcoin', 'testnet3'), 'testnet') // deprecated by Core 30.0, but still a testnet historically
+  assert.equal(classifyChain('bitcoin', 'testnet4'), 'testnet') // BIP 94, testnet3's replacement
+  assert.equal(classifyChain('bitcoin', 'signet'), 'testnet') // BIP 325
 })
 
 test('classifyChain(): the central doctrine — anything not in the registry is "unknown", never a guess', () => {
