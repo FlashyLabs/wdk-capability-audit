@@ -15,7 +15,7 @@
     }
   },
   "scripts": {
-    "test": "node --test test/*.test.mjs",
+    "test": "node --test test/audit.test.mjs test/cli.test.mjs test/discover.test.mjs test/faucets.test.mjs test/inspect.test.mjs test/manifest.test.mjs test/registry.test.mjs test/report.test.mjs test/schema-validate.test.mjs test/strike.test.mjs test/test-script.test.mjs test/workflow-pins.test.mjs",
     "manifest": "node src/manifest.js --write",
     "check": "node src/manifest.js --check",
     "version": "npm run manifest && git add wdk-capability-audit.manifest.json",
