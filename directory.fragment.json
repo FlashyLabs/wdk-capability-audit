@@ -1,0 +1,80 @@
+{
+  "contract": "directory/1",
+  "generated": "2026-09-29",
+  "org": "org/wdk-capability-audit",
+  "nodes": [
+    {
+      "id": "org/wdk-capability-audit",
+      "kind": "org",
+      "name": "Wdk Capability Audit"
+    },
+    {
+      "id": "person/michael",
+      "kind": "person",
+      "name": "Michael Gord"
+    },
+    {
+      "id": "agent/wdk-capability-audit-maintainer",
+      "kind": "agent",
+      "name": "maintainer",
+      "for": "org/wdk-capability-audit"
+    },
+    {
+      "id": "agent/wdk-capability-audit-review",
+      "kind": "agent",
+      "name": "review",
+      "for": "org/wdk-capability-audit"
+    },
+    {
+      "id": "agent/wdk-capability-audit-release",
+      "kind": "agent",
+      "name": "release",
+      "for": "org/wdk-capability-audit"
+    },
+    {
+      "id": "agent/wdk-capability-audit-conformance",
+      "kind": "agent",
+      "name": "conformance",
+      "for": "org/wdk-capability-audit"
+    },
+    {
+      "id": "agent/wdk-capability-audit-operations",
+      "kind": "agent",
+      "name": "operations",
+      "for": "org/wdk-capability-audit"
+    }
+  ],
+  "edges": [
+    {
+      "from": "org/wdk-capability-audit",
+      "rel": "staffs",
+      "to": "agent/wdk-capability-audit-maintainer",
+      "by": "person/michael"
+    },
+    {
+      "from": "org/wdk-capability-audit",
+      "rel": "staffs",
+      "to": "agent/wdk-capability-audit-review",
+      "by": "person/michael"
+    },
+    {
+      "from": "org/wdk-capability-audit",
+      "rel": "staffs",
+      "to": "agent/wdk-capability-audit-release",
+      "by": "person/michael"
+    },
+    {
+      "from": "org/wdk-capability-audit",
+      "rel": "staffs",
+      "to": "agent/wdk-capability-audit-conformance",
+      "by": "person/michael"
+    },
+    {
+      "from": "org/wdk-capability-audit",
+      "rel": "staffs",
+      "to": "agent/wdk-capability-audit-operations",
+      "by": "person/michael"
+    }
+  ],
+  "x-note": "Five agents, one per charter role. Generated from flashyos.roles.json; a live org is provisioned from the charter with provision-org-from-charter."
+}
