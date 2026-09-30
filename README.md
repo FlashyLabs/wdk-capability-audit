@@ -21,6 +21,12 @@ A capability audit for wallets built on [Tether's WDK](https://github.com/tether
 
 Built by [Flashy Labs](https://flashyos.com) — part of the open-source toolkit we ship for teams building on Tether's WDK. Its siblings are [`@flashylabs/wdk-policy-guard`](https://github.com/FlashyLabs/wdk-policy-guard) and [`@flashylabs/wdk-staking-kit`](https://github.com/FlashyLabs/wdk-staking-kit).
 
+> ### ⚠️ Known limitation — read before you trust a report
+>
+> **The chain-declaration convention is unverified against a shipping `@tetherto/wdk-*` release.** `inspectModule()` looks for a package's chains at `wdk.chains` inside its own `package.json`, but that convention has **not** been observed in any real, published `@tetherto/wdk-*` package. Six real WDK packages were inspected on the development machine and **none declares `wdk.chains`** (or any static chain configuration) in `package.json` — those packages take their chain configuration from the integrating application at runtime instead.
+>
+> **The practical consequence: against today's real `@tetherto/wdk-*` packages this tool returns `unrecognized-shape` / **0 chains** for every one of them.** That is the tool refusing to guess, by design — not a clean bill of health. Do not read a `0 chains` / `unrecognized-shape` result as "no testnet exposure"; read it as "this tool could not recognize the shape and said so." The day a real WDK release confirms a chain-declaration convention, `inspectModule()` is the one place to update ([`CONTRIBUTING.md`](CONTRIBUTING.md)). Full detail is in [Status](#status).
+
 ## Why this exists
 
 Before a team commits to a chain in production, somebody has to answer a boring but load-bearing question: *which of the WDK modules we have installed actually point at mainnet, and which are still wired to a testnet we forgot to swap out?* That question gets answered by hand today — open each `@tetherto/wdk-*` package, find its chain configuration, cross-reference the chain id against what you remember mainnet and testnet to be. It is exactly the kind of check that is easy to get right once and easy to get wrong silently the second time, six months later, after a dependency bump nobody re-reviewed.
